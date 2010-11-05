@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="JUnit-Test-Example" failures="0" tests="1" time="0.021" errors="0">
-  <properties/>
-  <testcase name="testJunit" time="0.0040" classname="org.coode.dlquery.JUnitExample"/>
-</testsuite>
