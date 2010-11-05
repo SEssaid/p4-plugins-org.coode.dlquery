@@ -2,19 +2,16 @@
 
 <suite name="DLQuery-Test-Suite" verbose="1">
 
-		<test name="Unit 1">
-		<!-- <classes> <class name="edu.stanford.bmir.protege.web.server.WatchedEntitiesCacheTest"></class> 
-			<class name="client.TestUnitProtege"></class> </classes> -->
 		<test name="JUnit-Test-Example" junit="true">
 			<classes>
 				<class name="org.coode.dlquery.JUnitExample"></class>
 			</classes>
 		</test>
 
-		<packages>
-			<package name="org.coode.dlquery" />
-		</packages>
-
-	</test>
+		<test name="TestNG-Tests" >
+			<packages>
+				<package name="org.coode.dlquery" />
+			</packages>
+		</test>
 
 </suite>
