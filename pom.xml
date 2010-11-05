@@ -7,7 +7,7 @@
 	<artifactId>dlquery</artifactId>
 	<packaging>jar</packaging>
 	<name>protege-plugin-dlquery</name>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.3-SNAPSHOT</version>
 
 	<properties>
 		<maven.compiler.source>1.6</maven.compiler.source>
