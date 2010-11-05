@@ -9,6 +9,7 @@
 		</test>
 
 		<test name="TestNG-Tests" >
+		    <parameter name="alabel"  value="Pizza"/>
 			<packages>
 				<package name="org.coode.dlquery" />
 			</packages>
