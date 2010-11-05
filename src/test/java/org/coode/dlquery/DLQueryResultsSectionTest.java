@@ -2,6 +2,7 @@ package org.coode.dlquery;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 /**
@@ -23,6 +24,7 @@ public class DLQueryResultsSectionTest {
 	  }
 	
 	@Test(dependsOnMethods = {"testGetName"})
+	@Parameters({ "alabel" })
 	public void testGetNameAgain(String alabel){
 		resultssection = new DLQueryResultsSection(alabel);
 		Assert.assertEquals(alabel, resultssection.getName());
