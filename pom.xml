@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>edu.stanford.smi.protegex</groupId>
 	<artifactId>dlquery</artifactId>
 	<packaging>jar</packaging>
 	<name>protege-plugin-dlquery</name>
-	<version>0.0.3-SNAPSHOT</version>
+	<version>0.0.3</version>
 
 	<properties>
 		<maven.compiler.source>1.6</maven.compiler.source>
@@ -15,17 +14,34 @@
 	</properties>
 
 	<distributionManagement>
+		<!-- If this pom.xml is executed on a developer's machine (mvn deploy) 
+			the developer's local repositories will be used, if executed on the BMIR the BMIR repositories. -->
 		<repository>
 			<id>releases</id>
-			<url>${nexus.path}</url>
+			<name>Releases</name>
+			<url>http://localhost:8081/nexus/content/repositories/releases</url>
 		</repository>
 
 		<snapshotRepository>
 			<id>snapshots</id>
-			<name>Internal Snapshots</name>
-			<url>${nexus.path}</url>
+			<name>Snapshots</name>
+			<url>http://localhost:8081/nexus/content/repositories/snapshots</url>
 		</snapshotRepository>
+		
+		 <site>
+      		<id>snapshots</id>
+      		<url>file://C:\Users\DrCJ\workspaceMavenProtege\protege-plugin-dlquery\doc/</url>
+    	</site>
+		
 	</distributionManagement>
+
+	<scm>
+		<connection>scm:svn:http://smi-protege.stanford.edu/repos/protege/protege4/plugins/org.coode.dlquery/tags/dlquery-0.0.3</connection>
+		<!--<developerConnection>scm:svn:https://127.0.0.1/svn/my-project</developerConnection>-->
+		<tag>HEAD</tag>
+		<url>http://smi-protege.stanford.edu/repos/protege/protege4/plugins/org.coode.dlquery/tags/dlquery-0.0.3</url>
+	</scm>
+	
 
 
 	<dependencies>
@@ -84,7 +100,13 @@
 				<artifactId>maven-jar-plugin</artifactId>
 				<version>2.3.1</version>
 			</plugin>
-
+		
+			<!-- Updates release number, can also tag in SVN  -->
+			<plugin>
+				<artifactId>maven-release-plugin</artifactId>
+			</plugin>
+		
+		
 			<!-- Execution of unit tests Generates output for reporting plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
