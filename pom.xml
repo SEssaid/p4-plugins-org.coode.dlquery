@@ -37,9 +37,9 @@
 
 	<scm>
 		<connection>scm:svn:http://smi-protege.stanford.edu/repos/protege/protege4/plugins/org.coode.dlquery/tags/dlquery-0.0.3</connection>
-		<!--<developerConnection>scm:svn:https://127.0.0.1/svn/my-project</developerConnection>-->
+		<developerConnection>scm:svn:http://smi-protege.stanford.edu/repos/protege/protege4/plugins/org.coode.dlquery/tags/dlquery-0.0.3</developerConnection>
 		<tag>HEAD</tag>
-		<url>http://smi-protege.stanford.edu/repos/protege/protege4/plugins/org.coode.dlquery/tags/dlquery-0.0.3</url>
+		<url>http://smi-protege.stanford.edu/repos/protege/protege4/plugins/org.coode.dlquery/tags/dlquery</url>
 	</scm>
 	
 
@@ -90,9 +90,32 @@
 	</organization>
 
 	<build>
-		<outputDirectory>test-output-directory</outputDirectory>
-
+		<!-- The final name uses the build namber plugin. You can either us the repository id,
+		 an incremental number or a timestamp. or combination of those -->
+	 	<finalName>${project.artifactId}-${project.version}-r${buildNumber}</finalName>
+	 	
 		<plugins>
+			<!-- This plugin is needed to autoincrement the version number -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>buildnumber-maven-plugin</artifactId>
+				<version>1.0-beta-3</version>
+				<executions>
+					<execution>
+						<phase>validate</phase>
+						<goals>
+							<goal>create</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<!-- the "0" refers to item[0] which is the timestamp -->
+					<format>{0,date,yyyy-MM-dd-HH-mm-ss}</format>
+					<items>
+						<item>timestamp</item>
+					</items>
+				</configuration>		
+			</plugin>
 
 			<!-- Create jar file -->
 			<plugin>
@@ -105,7 +128,53 @@
 			<plugin>
 				<artifactId>maven-release-plugin</artifactId>
 			</plugin>
-		
+
+			<!-- The properties plugin might be used to define certain parameters
+			in a properties file. for demonstration purposes we did that to
+			demonstrate how to customize the output directory (s. "next" plugin) -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+			    <artifactId>properties-maven-plugin</artifactId>
+    			<version>1.0-alpha-1</version>
+				<executions>
+					<execution>
+						<phase>initialize</phase>
+						<goals>
+							<goal>read-project-properties</goal>
+						</goals>
+						<configuration>
+							<files>
+								<file>src/main/resources/example.properties</file>
+							</files>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+				
+			<!--  Optional: Copy output additionally to a specified directory-->
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.4.3</version>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<!-- here the phase you need -->
+						<phase>test</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${outputdir}</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src</directory>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		
 			<!-- Execution of unit tests Generates output for reporting plugin -->
 			<plugin>
@@ -132,6 +201,8 @@
 					</execution>
 				</executions>
 			</plugin>
+			
+			<!--  -->
 
 			<!-- Compile Java Code -->
 			<plugin>
