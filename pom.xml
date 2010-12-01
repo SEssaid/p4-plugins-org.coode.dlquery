@@ -35,13 +35,14 @@
 		
 	</distributionManagement>
 
+	<!-- the following is just an example to show how to connect to SVN, e.g. to update the SVN with a tag
 	<scm>
 		<connection>scm:svn:http://smi-protege.stanford.edu/repos/protege/protege4/plugins/org.coode.dlquery/tags/dlquery-0.0.3</connection>
 		<developerConnection>scm:svn:http://smi-protege.stanford.edu/repos/protege/protege4/plugins/org.coode.dlquery/tags/dlquery-0.0.3</developerConnection>
 		<tag>HEAD</tag>
 		<url>http://smi-protege.stanford.edu/repos/protege/protege4/plugins/org.coode.dlquery/tags/dlquery</url>
 	</scm>
-	
+	-->
 
 
 	<dependencies>
